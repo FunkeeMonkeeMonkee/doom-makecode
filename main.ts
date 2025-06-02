@@ -1,30 +1,6 @@
 namespace SpriteKind {
     export const door = SpriteKind.create()
 }
-function DOORS_O () {
-    for (let value2 of tiles.getTilesByType(assets.tile`myTile5`)) {
-        i = sprites.create(img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            c c c c c c c c c c c c c c c c 
-            c b b b b b b c c b b b b b b c 
-            c b b b b b b c c b b b b b b c 
-            c b . . 1 . b c c b . . 1 . b c 
-            c b . 1 . . b c c b . 1 . . b c 
-            c b b b b b b c c b b b b b b c 
-            c b b b b b b c c b b b b b b c 
-            c b b c c b b c c b b c c b b c 
-            c b b c b b b c c b b b c b b c 
-            c b b c b b b c c b b b c b b c 
-            c b b c c b b c c b b c c b b c 
-            c b b b b b b c c b b b b b b c 
-            c c c c c c c c c c c c c c c c 
-            `, SpriteKind.door)
-        i.setPosition(value2.x, value2.y)
-        tiles.setTileAt(value2, assets.tile`transparency16`)
-    }
-}
 function spawn_player () {
     for (let value of tiles.getTilesByType(assets.tile`myTile3`)) {
         me.setPosition(value.x, value.y)
@@ -664,14 +640,8 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         })
     }
 })
-browserEvents.onEvent(browserEvents.Event.PointerDown, function () {
-	
-})
 info.onCountdownEnd(function () {
     powerup_active = 0
-})
-browserEvents.onMouseMove(function (x, y) {
-	
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.door, function (sprite, otherSprite) {
     animation.runImageAnimation(
@@ -1318,11 +1288,59 @@ function gun_stuff () {
         )
     }
 }
+function enemys () {
+    for (let value2 of tiles.getTilesByType(assets.tile`myTile5`)) {
+        i = sprites.create(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            c c c c c c c c c c c c c c c c 
+            c b b b b b b c c b b b b b b c 
+            c b b b b b b c c b b b b b b c 
+            c b . . 1 . b c c b . . 1 . b c 
+            c b . 1 . . b c c b . 1 . . b c 
+            c b b b b b b c c b b b b b b c 
+            c b b b b b b c c b b b b b b c 
+            c b b c c b b c c b b c c b b c 
+            c b b c b b b c c b b b c b b c 
+            c b b c b b b c c b b b c b b c 
+            c b b c c b b c c b b c c b b c 
+            c b b b b b b c c b b b b b b c 
+            c c c c c c c c c c c c c c c c 
+            `, SpriteKind.door)
+        i.setPosition(value2.x, value2.y)
+        tiles.setTileAt(value2, assets.tile`transparency16`)
+    }
+}
+function DOORS () {
+    for (let value2 of tiles.getTilesByType(assets.tile`myTile5`)) {
+        i = sprites.create(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            c c c c c c c c c c c c c c c c 
+            c b b b b b b c c b b b b b b c 
+            c b b b b b b c c b b b b b b c 
+            c b . . 1 . b c c b . . 1 . b c 
+            c b . 1 . . b c c b . 1 . . b c 
+            c b b b b b b c c b b b b b b c 
+            c b b b b b b c c b b b b b b c 
+            c b b c c b b c c b b c c b b c 
+            c b b c b b b c c b b b c b b c 
+            c b b c b b b c c b b b c b b c 
+            c b b c c b b c c b b c c b b c 
+            c b b b b b b c c b b b b b b c 
+            c c c c c c c c c c c c c c c c 
+            `, SpriteKind.door)
+        i.setPosition(value2.x, value2.y)
+        tiles.setTileAt(value2, assets.tile`transparency16`)
+    }
+}
+let i: Sprite = null
 let powerup_active = 0
 let projectile: Sprite = null
 let shotgun: Sprite = null
 let shooting_state = 0
-let i: Sprite = null
 let ammobar_hud: StatusBarSprite = null
 let me: Sprite = null
 let gun_list = 0
@@ -1652,9 +1670,10 @@ let mySprite2 = sprites.create(img`
 gun_stuff()
 music.play(music.createSong(hex`005e0104081f0104001c00100500640000041e000004000000000000000000000000000a040004e20208000c00011d10001400012918001c00011d20002400011d28002c00012730003400011d38003c00011d40004400012548004c00011d50005400011d58005c00012460006400011d68006c00011d70007400012478007c00012580008400011d88008c00011d90009400012998009c00011da000a400011da800ac000127b000b400011db800bc00011dc000c4000125c800cc00011dd000d400011dd800e8000124f800fc00011d00010401011d08010c01012910011401011d18011c01011d20012401012728012c01011d30013401011d38013c01012540014401011d48014c01011d50015401012458015c01011d60016401011d68016c01012470017401012578017c01011d80018401011d88018c01012990019401011d98019c01011da001a4010127a801ac01011db001b401011db801bc01012abc01c0010127c001c401011ec401c801011ec801cc010129cc01d0010125d001d401011dd401d801011dd801dc01012adc01e0010127e001e401011ee401e801011ee801ec01012cec01f0010127f001f4010122f401f801012200020402012408020c02012410021402012c18021c02012420022402012428022c02012a30023402012438023c02012440024402012948024c02012450025402012458025c02012760026402012468026c02012470027402012778027c02012980028402012488028c02012490029402012c98029c020124a002a4020124a802ac02012ab002b4020124b802bc020124c002c4020129c802cc020124d002d4020124d802e8020127f802fc02012400030403012408030c03012c10031403012418031c03012420032403012a28032c03012430033403012438033c03012940034403012448034c03012450035403012758035c03012460036403012468036c03012770037403012978037c03012480038403012488038c03012c90039403012498039c030124a003a403012aa803ac030124b003b4030124b803bc030129c003c4030124c803cc030124d003e0030127`), music.PlaybackMode.LoopingInBackground)
 tiles.setCurrentTilemap(tilemap`level3`)
-Render.moveWithController(5, 4, 1)
+Render.moveWithController(5, 3, 1)
 spawn_player()
-DOORS_O()
+DOORS()
+enemys()
 game.onUpdate(function () {
     if (shooting_state == 0) {
     	
